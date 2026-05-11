@@ -1,4 +1,5 @@
 import { PlusCircle } from "lucide-react";
+import "./components-styles.css";
 
 export default function Sidebar({isSidebarOpen, navItems, setIsSidebarOpen}) {
     return (
@@ -12,7 +13,7 @@ export default function Sidebar({isSidebarOpen, navItems, setIsSidebarOpen}) {
     >
       <div className="flex flex-col h-full">
         {/* Logo Section */}
-        <div className="h-16 flex items-center px-6 text-xl font-bold border-b border-gray-700">
+        <div className=" title h-16 flex items-center px-6 text-xl font-bold border-b border-gray-700">
           <span className="text-blue-400 mr-2"></span> Jobify
         </div>
 
@@ -22,7 +23,7 @@ export default function Sidebar({isSidebarOpen, navItems, setIsSidebarOpen}) {
             <a
               key={item.name}
               href={item.href}
-              className="flex items-center gap-3 px-4 py-3 rounded-lg text-gray-300 hover:bg-white/10 hover:text-white transition-colors"
+              className="flex items-center gap-3 px-4 py-3 rounded-lg text-gray-300 hover:bg-white/10 hover:text-white transition-colors side-bar-link"
             >
               <item.icon size={20} />
               <span>{item.name}</span>
@@ -32,7 +33,7 @@ export default function Sidebar({isSidebarOpen, navItems, setIsSidebarOpen}) {
 
         {/* Bottom Action */}
         <div className="p-4 border-t border-gray-700">
-          <button className="w-full flex items-center justify-center gap-2 bg-blue-600 hover:bg-blue-700 text-gray-300 py-3 rounded-lg font-medium transition-all">
+          <button className="post-btn w-full flex items-center justify-center gap-2 bg-blue-600 hover:bg-blue-700 text-gray-300 py-3 rounded-lg font-medium transition-all">
             <PlusCircle size={20} />
             <span>Post New Job</span>
           </button>
@@ -43,7 +44,7 @@ export default function Sidebar({isSidebarOpen, navItems, setIsSidebarOpen}) {
       {isSidebarOpen && (
         <div
           className="fixed inset-0 bg-black/50 z-40 lg:hidden"
-          onClick={() => setIsSidebarOpen(false)}
+          onClick={setIsSidebarOpen}
         />
       )}
     </aside>
