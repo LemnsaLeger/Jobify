@@ -48,7 +48,9 @@ export default function Home() {
         navItems={navItems.map((item) => ({
           ...item,
           onClick: () => setActiveTab(item.name.toLowerCase().replace(/ /g, "")),
-        })) } />
+        })) } 
+        
+        setIsSidebarOpen={(isOpen) => setIsSidebarOpen(isOpen)}/>
       
 
       {/* --- Main Content Area --- */}

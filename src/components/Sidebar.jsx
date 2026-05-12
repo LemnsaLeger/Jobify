@@ -26,6 +26,7 @@ export default function Sidebar({isSidebarOpen, navItems, setIsSidebarOpen}) {
               className="flex items-center gap-3 px-4 py-3 rounded-lg text-gray-300 hover:bg-white/10 hover:text-white transition-colors side-bar-link"
               onClick={(e) => {
                 e.preventDefault();
+                setIsSidebarOpen(false); // Close sidebar on link click
                 item.onClick(); //  onClick handler passed from Home
               }}
             >
@@ -47,9 +48,19 @@ export default function Sidebar({isSidebarOpen, navItems, setIsSidebarOpen}) {
       {/* Mobile Overlay (Click to close sidebar) */}
       {isSidebarOpen && (
         <div
-          className="fixed inset-0 bg-black/50 z-40 lg:hidden"
-          onClick={setIsSidebarOpen}
-        />
+          className="fixed z-40 lg:hidden flex justify-end top-5 left-50"
+          onClick={() => setIsSidebarOpen(false)} 
+        >
+          <button
+            className="text-white bg-red-600 p-2 rounded-full m-4 h-5 w-5 flex items-center justify-center"
+            onClick={(e) => {
+              e.stopPropagation(); 
+              setIsSidebarOpen(false); 
+            }}
+          >
+            x
+          </button>
+        </div>
       )}
     </aside>
     )
