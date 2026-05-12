@@ -6,7 +6,7 @@ export default function Navbar({setIsSidebarOpen, isSidebarOpen}) {
 
 return (
     // --- Navbar (Header) ---
-    <header className="h-16 bg-white border-b border-gray-200 flex items-center justify-between px-4 lg:px-8 fixed top-0 z-40 py-4 w-[80%]">
+    <header className="h-16 bg-white border-b border-gray-200 flex items-center justify-between px-4 lg:px-8 fixed top-0 z-40 py-4 w-full sm:left-0 lg:left-50 lg:w-[90%]">
       <div className="flex items-center gap-4 p-8">
         {/* Mobile Toggle Button */}
         <button
@@ -35,7 +35,7 @@ return (
           <p className="text-xs text-gray-500">Applicant</p>
         </div>
         <img
-          className="h-10 w-10 rounded-full border-2 border-white shadow-sm"
+          className="h-10 w-10 rounded-full border-2 border-white shadow-sm mr-10"
           src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?auto=format&fit=crop&q=80&w=150"
           alt="User profile"
         />
