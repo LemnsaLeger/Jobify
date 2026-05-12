@@ -4,47 +4,65 @@ import {
   Calendar,
   Users,
   Settings,
-  PlusCircle,
-  Menu,
-  X,
 } from "lucide-react";
 
 import { useState } from "react";
-import Sidebar from "../components/Sidebar";
+import MyApplications from "../components/myapplications";
 import Navbar from "../components/Navbar";
+import Sidebar from "../components/Sidebar";
 import Dashboard from "../components/dashboard";
 
-import "../../src/index.css";
-
 const navItems = [
-  { name: "Dashboard", icon: LayoutDashboard, href: "#" },
-  { name: "My Applications", icon: Briefcase, href: "#" },
-  { name: "Interviews", icon: Calendar, href: "#" },
-  { name: "Contacts", icon: Users, href: "#" },
-  { name: "Settings", icon: Settings, href: "#" },
+  { name: "Dashboard", icon: LayoutDashboard, href: "/", component: <Dashboard /> },
+  { name: "My Applications", icon: Briefcase, href: "/myapplications", component: <MyApplications /> },
+  { name: "Interviews", icon: Calendar, href: "#", component: <div>Interviews Page</div> },
+  { name: "Contacts", icon: Users, href: "#", component: <div>Contacts Page</div> },
+  { name: "Settings", icon: Settings, href: "#", component: <div>Settings Page</div> },
 ];
 
-
-export default function Home({children}) {
+export default function Home() {
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
-    return (
-      <div className="min-h-screen bg-gray-50 flex">
-        <Sidebar isSidebarOpen={isSidebarOpen} navItems={navItems} />
+  const [activeTab, setActiveTab] = useState("dashboard");
 
-        {/* --- Main Content Area --- */}
-        <div className="h-20 flex-1 flex flex-col w-auto justify-between lg:ml-5 sm:w-full md:w-full bg-amber-700">
-          <Navbar
-            setIsSidebarOpen={
-              () => setIsSidebarOpen(!isSidebarOpen)
-            }
-            isSidebarOpen={isSidebarOpen}
-          />
-        </div>
+  const renderMainContent = () => {
+    switch (activeTab) {
+      case "dashboard":
+        return <Dashboard />;
+      case "myapplications":
+        return <MyApplications />;
+      case "interviews":
+        return <div>Interviews Page</div>;
+      case "contacts":
+        return <div>Contacts Page</div>;
+      case "settings":
+        return <div>Settings Page</div>;
+      default:
+        return <Dashboard />;
+    }
+  };
 
-        {/* Dashboard Content */}
-        <main className="p-4 lg:p-8 overflow-y-auto">
-          <Dashboard />
-        </main>
+  return (
+    <div className="min-h-screen bg-gray-50 flex">
+      <Sidebar
+        isSidebarOpen={isSidebarOpen}
+        navItems={navItems.map((item) => ({
+          ...item,
+          onClick: () => setActiveTab(item.name.toLowerCase().replace(/ /g, "")),
+        })) } />
+      
+
+      {/* --- Main Content Area --- */}
+      <div className="h-20 flex-1 flex flex-col justify-between lg:ml-5 sm:w-full md:w-full bg-amber-700">
+        <Navbar
+          setIsSidebarOpen={() => setIsSidebarOpen(!isSidebarOpen)}
+          isSidebarOpen={isSidebarOpen}
+        />
       </div>
-    );
+
+      {/* Dynamic Content Based on Active Tab */}
+      <main className="p-4 lg:p-8 mt-10 w-full">
+        {renderMainContent()}
+      </main>
+    </div>
+  );
 }
